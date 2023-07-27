@@ -35,6 +35,7 @@ var hasPathSum = function (root, targetSum) {
 
     function traverse(node) {
         if (!node) return;
+        if (res) return;
         if (node.left) {
             total += node.left.val;
             traverse(node.left);
