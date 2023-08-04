@@ -52,7 +52,7 @@ var hasPathSum = function (root, targetSum) {
 /* 
 ===== Problem 2 =====
 
-Problem Name: Path Sum
+Problem Name: Minimum Depth of Binary Tree
 Problem Description: Given a binary tree, find its minimum depth.
 The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
 Note: A leaf is a node with no children.
@@ -75,23 +75,18 @@ My Answer:
  * @return {number}
  */
 var minDepth = function (root) {
-    if (!root) return null;
-    let temp = 1;
-    let res = [];
-    traverse(root);
-    return Math.min(...res);
-
-    function traverse(node) {
-        if (!node) return null;
-        if (node.left) {
-            temp++;
-            traverse(node.left);
+    if (!root)
+        return 0;
+    res = 10000005;
+    dfs(root, 1);
+    function dfs(root, depth) {
+        if (!root) return;
+        if (!root.left && !root.right) {
+            res = Math.min(res, depth);
+            return;
         }
-        if (node.right) {
-            temp++;
-            traverse(node.right);
-        }
-        if (!node.right && !node.left) res.push(temp);
-        temp--;
+        dfs(root.left, depth + 1);
+        dfs(root.right, depth + 1);
     }
+    return res;
 };
