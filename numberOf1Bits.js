@@ -1,5 +1,3 @@
-// How could this be made to loop only 8 or 4 times?
-
 var hammingWeight = function (n) {
     let res = 0;
     for (let i = 0; i < 16; i++) {
@@ -10,4 +8,16 @@ var hammingWeight = function (n) {
         n >>= 2;
     }
     return res;
+};
+
+// New solution after learning more about bit operators
+var hammingWeight = function (n) {
+    var count = 0;
+
+    while (n > 0) {
+        if (n & 1) count++;
+        n = n >>> 1;
+    }
+
+    return count;
 };
